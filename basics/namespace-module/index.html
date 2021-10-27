@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Namespace and Modules</title>
+</head>
+<body>
+	<script type="text/javascript" src="script.js"></script>
+	<script type="text/javascript">
+		// Send information to our function using object
+		// ray.speak('howdy');
+		// but it's better to passing information as object
+		// ray.speak({name: 'Mahmudul'},{age:'21',gender:'male'});
+		// If we executing the method but doesn't pass anything then it will give an error
+		// The following execution produce a TypeError like TypeError: arguments[0] is undefined
+		// short circuit evaluation is handy for avoiding such type of problem
+		// ray.speak();
+		// ray.run({speed: 'fast'});
+		// ray.run();
+		// Method chaining is possible when we use this inside the object
+		// that means it refers the current object
+		ray.speak({name: 'Mahmudul'},{age:'21',gender:'male'}).run().speak({name: 'Mehedi'},{age:'24',gender:'male'}).run({speed: 'fast'});
+	</script>
+</body>
+</html>

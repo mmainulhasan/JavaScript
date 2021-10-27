@@ -1,0 +1,41 @@
+
+<script type="text/javascript">
+	// Using a for loop with an array
+	var numbers = [3, 7, 12, 22, 100];
+	var sum = 0;
+	for (var i = 0; i < numbers.length; ++i){
+		sum += numbers[i];
+	}
+
+	document.writeln(sum); // displays 144
+
+	// value-returning function
+	function factorial(number) {
+		var product = 1;
+		for (var i = number; i >= 1; --i) {
+			product *= i;
+		}
+			return product;
+	}
+	document.writeln(factorial(4)); // displays 24
+	document.writeln(factorial(5)); // displays 120
+	document.writeln(factorial(10)); // displays 3628800
+
+	document.write("<br>"+"A subprocedure or void function in JavaScript" + "<br>");
+	// A subprocedure or void function in JavaScript
+	function curve(arr, amount) {
+		for (var i = 0; i < arr.length; ++i) {
+			arr[i] += amount;
+		}
+
+		return arr;
+	}
+	var grades = [77, 73, 74, 81, 90];
+	// var arr = curve(grades, 5);
+	curve(grades, 5);
+	document.writeln(grades); // displays 82,78,79,86,95
+	document.writeln("<br>");
+	// var arr = curve(grades, 5);
+	// document.writeln(arr); // displays 82,78,79,86,95
+
+</script>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8"/>
+	<title>Relationship between DOM and Events</title>
+</head>
+<body>
+	<button>Click me</button>
+	<p>No handler here.</p>
+	<script>
+		// Every DOM element has its own addEventListener method, 
+		// which allows you to listen specifically on that element
+		var button = document.querySelector("button");
+		button.addEventListener("click", function() {
+			console.log("Button clicked.");
+		});
+		// The example attaches a handler to the button node. Thus, clicks on the
+		// button cause that handler to run, whereas clicks on the rest of the document
+		// do not.
+		function talksAbout(node, string){
+			if (node.nodeType == document.ELEMENT_NODE) {
+				for (var i = 0; i < node.childNodes.length; i++) {
+					if (talksAbout(node.childNodes[i], string))
+					return true;
+				}
+				return false;
+			} else if (node.nodeType == document.TEXT_NODE) {
+			  return node.nodeValue.indexOf(string) > -1;
+		    }
+		}
+		console.log(talksAbout(document.body, "book"));
+		// . true
+	</script>
+</body>
+</html>

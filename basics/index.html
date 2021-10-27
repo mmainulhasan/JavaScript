@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Javascript Basics</title>
+</head>
+<body>
+	
+	<form name = "testForm">
+	    Username: <input type ="text" name="userNameText"/>
+	    Password: <input type ="password" name="password"/>
+	    <input type="submit" value="Submit!"/>      
+	</form>
+
+	<form>
+	    Username: <input type="text"/>
+	    Password: <input type="password"/>
+	    <input type="submit" value="Submit!"/>
+	</form>
+	<form>
+	    Username: <input type="text"/>    
+	    <input type="submit" value="Submit!"/>
+	</form>
+	<form>
+	    Username: <input type="text"/>
+	</form>
+
+	<form>
+	    <input type="button" value="touch me" onclick="alert('Hello!!'), alert('World!!'), alert(addNumbers(3,6)), consol.log(addNumbers(4,6))"/>
+	</form>
+
+	<form>
+	    <input type="button" value="touch me" onclick="alert('Hello!!'), alert('World!!'), alert(addNumbers(3,6)), console.log(addNumbers(4,6))"/>
+	</form>
+
+	<form>
+	    <input type="button" value="touch me" onclick="funky()">
+	</form>
+
+	<script type="text/javascript">
+
+		// double slash is used for single line comment
+		/*
+		  I am Mainul Hasan
+		  I am from Noakhali
+		 */ 
+
+		 // /*  */ is used for multiple comments
+
+		/*
+		 Assignment Operators
+		    --Assignment operators or equal sign is used to assign the value of the variables
+		
+		 */
+		var nabhan = 24;
+		nabhan += 67;
+		nabhan -= 32;
+		nabhan *= 4;
+		nabhan /= 5;
+		
+		console.log("<br/>" + "Final Score is " + nabhan + "<br />");
+		
+
+		/*
+		 Add Array elements with Loop
+		 -- Never use name as a variable in javascript because it is the attribute of the html element if we use name as a variable then in output give us the value is undefined
+		 */
+
+		// var namee = [];
+		// for(var begin = 0; begin < 3; begin++){
+		// 	namee[begin] = prompt("Enter your Name:","e.g Mainul Hasan");
+		// }
+		// document.write(namee[0] + "<br/>" + namee[1] + "<br/>" + namee[2] + "<br/>");
+
+
+		/*
+		 Accessing Forms Elements
+		 -- Identified form, then select which elements we want to access, after that, identfies which attributes we want to access, for example, document.forms[0].elements[0].name
+		 -- Another way to access forms elements like
+		    docement.test-form.elements[0].name
+		   Or document.test-form.username(elements name).name
+		 */
+		var x = document.testForm.elements[0].name;
+		document.write(x);
+
+		/*
+		 Accessing Forms
+		   -- Javascript has built in ability to access forms and validation
+		   -- Whenever we add an form in xhtml javascript automatically create form objects
+		   -- JavaScript has unique way to identify form elements
+		   -- If page has 8 different forms javascript creates 8 arrays - first array is 0, second array index 1 ..
+		   -- The form is a part of the document; document is basically part of the web page  
+		 */
+
+		var anotherForm = document.forms[1].length;
+		document.write("<br/>" + "Total elements of Form is " + anotherForm);
+
+		function people(name, age){
+		    this.name = name;
+		    this.age = age;
+		    this.yearsUntilRetire = yearsLeft;
+		}
+		
+		function yearsLeft(){
+		    var numYears = 65 - this.age;
+		    return numYears;
+		}
+
+		var mainul = new people("Mainul Hasan", 24);
+		document.write("<br />" + "Total years before retirement is " + mainul.yearsUntilRetire());
+		
+		/*
+		 Arrays - One name store multiple values
+		 -- Array index is start from 0
+		 */
+		var people = new Array("Mainul", "Mehedi", "Mahmudul", "Jahid");
+		document.write("<br/>" + people[3]);
+
+		// Merge two arrays
+		var firstName = new Array("Sam", "Smith", "Clark");
+		var nickName = new Array("Ronaldo", "Messi", "Pointing");
+		
+		var collectionOfName = firstName.concat(nickName);
+		
+		document.write("<br/>" + "Name after concating the array " + collectionOfName[3]);
+
+		/*
+		 Associative Array
+		 -- is a key-value pair array where key is as usual named value and value is anything
+		 -- index element is replaced with named value instead of number
+		 */
+		var parrot = new Array();
+		parrot["color"] = "blue";
+		parrot["food"] = "rice";
+		
+		document.write("Parrot favourite food is " + parrot["food"]);
+
+		/*
+		  Calling A Function From Another Function
+		    -- If we want to see the output of the function must be called function
+		 */
+
+		function doFirst(){
+		    document.write(" first! ");
+		    doSecond();
+		}
+		function doSecond(){
+		    document.write(" second! ");
+		    doFirst();
+		}
+		
+		doFirst();
+
+		/*
+		 Complex Condition
+		 -- Complex condition is sometimes more interactive instead of nested code
+		 -- It is more simple and testable instead of nested code
+		 */
+
+		var firstName = "Mainul";
+		var lastName = "Hasan";
+		
+		if((firstName == "Mainul") && (lastName == "Hasan")){
+		    document.write("Hello dear!");
+		}
+
+		/*
+        Create Own Objects
+           -- Special data types has its own properties and methods
+           -- We can create objects in many ways one of the easiest way is constuctive function
+           -- if we have a blueprint of an object then we create any number of instance of that object         
+		*/
+
+		function person(name,age){
+		    this.name = name;
+		    this.age = age;
+		}
+		
+		var hasan = new person("Mainul Hasan", 24);
+		var mehedi = new person("Mehedi Hasan", 22);
+
+		document.write(hasan.name,hasan.age);
+		document.write(mehedi.name,mehedi.age);
+
+		 /*
+        Objects Initializers
+        	-- If we need one or two objects then Objects initializers is more useful than constructor function
+            -- But if we need hundreds or thousands of object then constructor function or blueprint is more useful
+        */
+		mainul = {
+			name:"Mainul Hasan",
+			age:24
+		};
+		nijum = {
+			name:"Tahafful Jahan",
+			age:4
+		};
+		console.log(mainul.name + " loves " + nijum.name + " because of his age" + nijum.age);
+
+		// Working with Dates
+		var today = new Date(); //current date and time
+
+		// year, month, day
+		var y2k = new Date(2000,0,1);
+
+		// year, month, day, hours, minutes, seconds
+		var y2k = new Date(2000,0,1,0,0,0);
+
+		// Get methods of the date object
+		var today = new Date();
+
+		today.getMonth(); 		// returns 0-11
+		today.getFullYear();		// YYYY (not zero-based)
+		today.getYear();			// deprecated
+		today.getDate();			// 1-31 day of month
+		today.getDay();			// 0-6 day of week. 0 === sunday
+		today.getHours();			// 0-23
+		today.getTime();			// milliseconds since 1/1/1970
+
+		// set methods of the date object
+		var today = new Date();
+
+		today.setMonth(5); 			// returns 0-11
+		today.setFullYear(2012);	// YYYY (not zero-based)
+		today.setDay(0);				// 0-6 day of week. 0 === sunday
+		//etc.
+
+		// Comparing Dates
+		var date1 = new Date(2000,0,1);
+		var date2 = new Date(2000,0,1);
+
+		if( date1 == date2 ) { // false
+		}
+
+		if(date1.getTime() == date2.getTime()) { ....
+		}	949388400000   == 943384000000
+			// true!
+
+		var myDate = new Date(1996,11,9);
+		console.log("Sabbir was born on: ", myDate.getDay() );
+
+		// Date Objects --is normally used in javascript to make a interactive clock
+	   function printTime(){
+        var now = new Date();
+        var hours = now.getHours();
+        var mins = now.getMinutes();
+        var seconds = now.getSeconds();
+        console.log(hours+":"+mins+":"+seconds+"<br />");
+	   }
+		
+		//setInterval has two parameters in this program first one is method and other one is miliseconds]    
+		setInterval("printTime()",3000);
+
+		/*Variables Types
+       	--Numbers
+       	--String
+       	--Boolean
+       	--Undefined
+       	--If we used a string with the quotation then must be used escape liked \" \"
+       	--One interesting thing in javascript is same variable is used multiple times in program
+      */
+
+      var testVariable = 20;
+      console.log(testVariable);
+      
+      var testVariable = 20.32212;
+      console.log(testVariable);
+      
+      var testVariable = "I am fine";
+      console.log(testVariable);
+      
+      var testVariable = "Mainul said ,\"I am coming from Noakhali\"";
+      console.log(testVariable);
+      
+      var testVariable = false;
+      console.log(testVariable);
+      
+      var testVariable;
+      console.log(testVariable);
+      
+      var testVariable;
+      console.log(testVariable);
+      
+      /*do while
+      	The difference between while and do while is that in while condition is first executed 
+         if condition is true then others statements executed otherwise loop is terminated in do-while 
+         statements are first executed then condition is checked so that we can say in do while statement
+         is executed at least one time
+      */
+      var testVariable = 35;
+      
+      do{
+          console.log(testVariable + " Hi! <br/>");
+          testVariable++;
+      }while(testVariable<=20);
+
+      // The length element is used to count the array size or element dynamically
+      var employee = new Array("Mainul", "Mehedi", "Mahmudul", "Zahid");
+      employee.sort();
+      
+      for(testVariable = 0; testVariable < employee.length; testVariable ++){
+          console.log(employee[testVariable]);
+      }
+
+      (function(){
+          try{
+              alert("This code will not fail");
+              abert("This code will fail");
+              alert("This will not execute");
+          }catch(err){
+              alert("An error Occured.Please try again later");
+              alert(err.message);
+              
+          }finally{
+              alert("This is within finally");
+          }
+      }());
+
+      /*
+       Event Handlers
+       		-- Basically first step to create more interactive and dynamic web page
+       		-- Running js code to response users action
+      */ 
+
+        function addNumbers(firstNo,secondNo){
+            var sum = firstNo + secondNo;
+            return sum;
+        }
+
+        /*
+         For Loop
+         	-- Saves our time, useful to print a text repeatedly
+        */ 
+        for(start = 1; start <=10; start++){
+            console.log(start + " I love Muhammad(pbuh). <br/>");
+        }
+
+        /*Functions
+          --Function is a mini program
+          --Formation of the function
+              function(keyword) function-name(like funky) parenthesis like()
+              {
+                  //body
+              }
+         --if we see the functionality or out put of the function must be called the function  
+         */ 
+
+        function funky(){
+            console.log("Ouch!!!");
+        }
+
+        function apples(one, two){
+            console.log(one + " is better than " + two + "<br/>");
+        }
+
+        // Multiple Parameters
+        apples("bucky","hobart");
+        apples("counting crows","beiber");
+        apples("strawberry","coconut");
+
+        /*
+         Global Variables
+            --Amy variable outside the function
+         Local Variables
+            --Any variables inside the function
+         */
+        function fruits(){
+            var fruitName = "apple";
+            console.log(fruitName);
+        }
+        fruits();
+        console.log(fruitName);
+
+        /*
+         If Else Statement
+         		--If Else statement gives us second option if in case if is not true
+         */
+        var blue = 43;
+        var red = 43;
+        
+        if(blue==red){
+            console.log("I love hotpockets");
+        }else{
+            console.log("I love strawberries!");
+        }
+
+        /*
+         If Statement or Conditional operator
+            --If condition is true then execute the statements of the curly bracs
+            --If used single = operator that means it leftside variable assign with the right side variable value
+            --For the comparison use == sign
+            --For the === sign; check comparison as well as with the data types
+         */
+        
+
+        var apples = 34;
+        var hotdogs = 34;
+        
+        if(apples = hotdogs){
+            console.log("Yeah it works!");
+        }
+        
+        
+        if(apples == hotdogs){
+            console.log("Yeah it works!");
+        }
+        
+        var apples = 34;
+        var hotdogs = 4;
+        
+        if(apples != hotdogs){
+            console.log("Yeah it works!");
+        }
+        
+        
+        var apples = 34.2;
+        var hotdogs = 34;
+        
+        if(apples === hotdogs){
+            console.log("Yeah it works!");
+        }
+
+        /*
+         Join and Pop
+         		-- The join method is used to join all array elements in a string
+         		-- We can also separate string element by usnig our customize separator like comma semicolon etc.
+         		-- The pop method is used to remove last element from the array
+         */ 
+
+        var books = new Array("Al-Quran","Bukhari","Muslim","Tirmidhi");
+        var string = books.join("------");
+        console.log(string);
+        books.pop();
+        console.log("<br />" + books[3]);
+        console.log(Math.PI); 
+        console.log(Math.E);
+        /*
+         Math Objects
+         		-- is used to perform simple math operation in easiest way like pi,e(exponent),sqrt etc.
+        */
+        var number = prompt("Enter a number","e.g 10");
+        var answer = Math.sqrt(number);
+        console.log("The square root of " + number + " is " + answer);
+        /*
+         Math Operators
+            --See the various consequences of math operators and 
+            --Increment and Decrement operator
+         */
+        var result = 5+6;
+        console.log(result);
+        
+        var result = 5-6;
+        console.log(result);
+        
+        var result = 5*6;
+        console.log(result);
+        
+        var result = 5/6;
+        console.log(result);
+        
+        var result = 5%6;
+        console.log(result);
+        
+        var chop = 6;
+        chop++;
+        console.log(chop);
+        
+        var chop = 6;
+        chop--;
+        console.log(chop);
+
+        /*
+         Nesting Statement
+           -- Nesting is concept where a condition is inside in another condition
+           -- In nesting if all conditions true then the statement is execute
+          
+         */
+
+       var firstName = "Mainul";
+       var lastName = "Mithu";
+           
+       if(firstName == "Mainul"){
+	         if(lastName == "Hasan"){
+	             document.write("welcome Mainul Hasan!");
+	         }else{
+	             document.write("welcome bucky someone!!!");
+	         }
+        }
+
+        console.log(Number('12345ajjf'));
+        console.log(Number("12345ajjf"));
+        console.log(parseInt('123asflkj111'));
+        var fullName = ['Mainul','Hasan','Mithu'];
+        var myName = fullName.join(' ');
+        console.log(myName);
+
+
+        /*
+         Here,
+         		--document and tuna is object
+         		--length is work as properties and 
+         		--write is method that does something especially print its contens 
+         */
+        /*
+           Objects
+            	--objects are just data with properties and methods
+            	--properties are values
+            	--methods are actions that objects does something
+            	--properties are the all variables
+         */
+        var tuna = "hey I am tuna fish";
+        console.log(tuna.length + "<br />");
+        
+        // create two objects
+        var player1 = {name: "Fred", score:1000, rank:1 };
+        var player2 = {name: "Sam", score:100000000, rank:5 };
+
+        function playerDetails() {
+            // displa information about each player
+            console.log(this.name + " has a rank of: " + this.rank + " and a score of " + this.score + "<br />");
+        }
+
+        player1.logDetails = playerDetails;
+        player2.logDetails = playerDetails;
+
+        player1.logDetails();
+        player2.logDetails();
+
+        /*
+         Switch Statement
+         --is useful to avoid multiple if statement
+         --break is used after every case statement to avoid continuous loop
+         --default is used to provide additional message in case if any cases doesn't match
+         --break is not necessary to use after default and it is also good practice to never use break after default 
+       **/ 
+       var country = "Bangladesh";
+       switch(country){
+           case "Bangladesh":
+               console.log("It's a beautiful country");
+               break;
+           case "India":
+               console.log("India is one of the most populated country in the world");
+               break;
+           default:
+               console.log("This is default");
+       }
+       
+       console.log(typeof NaN);
+       console.log("<br>"+typeof "NaN");
+       console.log("<br>"+typeof false);
+       console.log("<br>");
+       console.log(1+ +"1"+"2");
+       console.log("<br>");
+       console.log("A"-2);
+       console.log("<br>");
+       console.log("150"- -'100');
+       console.log("<br>");
+       console.log("150"+ -'100');
+       console.log("<br>");
+       console.log(+1+ +"1"+"2");
+       console.log("<br>");
+       console.log(8 * null)
+       console.log("<br>");
+       console.log("5" - 1)
+       // → 4
+       console.log("<br>");
+       console.log("5" + 1)
+       // → 51
+       console.log("<br>");
+       console.log("five" * 2)
+       // → NaN
+       console.log("<br>");
+       console.log(false == 0)
+       // → true 
+
+       /*Parameters
+        		--is used to passing different information
+        		--give additional information to function is called passing information
+        		--if we give the value of the parameters of the function this is called passing information
+        		--arguments substitute the values of the parameters variables
+        */
+       function meatball(name){
+           alert("I am " + name);
+       }
+       meatball("Mainul");
+       meatball("Hasan");
+       meatball("Mithu"); 
+
+       /* Variables name with strings
+          --If we want to cancate a variable with string then we used addition(+)sign
+          --Also concatenate different variables with (+) sign
+       */
+       
+       var name = "Mainul";
+       var age = 24;
+       console.log(name + " is my name and my age is " + age);
+       
+       var tuna = "I am a fish";
+       var bacon = "baconator?";
+       var ham = "hamburglarr";
+       console.log(tuna + bacon + ham);
+
+       /*JavaScript is weekly typed language
+         Variable name is case sensitive
+         variable name must be start with letter or underscore
+         variable may contains letter
+         variable must not contain whitespace or special characters
+         varible must not start with digits
+        */
+       var testVariable = 23;
+       console.log(testVariable);
+       
+       var testVariable = 23.32;
+       console.log(testVariable);
+       
+       var name = "Mainul Hasan";
+       console.log(name);
+
+       /*
+        while loop
+        		--More usable and readable then for loop 
+        */
+       var start = 1;
+       while(start < 10){
+           console.log(start + " I love to say prayer <br />");
+           start++;
+       }
+
+   		console.log('Hello FTFL');//print small information
+   		console.log("Hello FTFL");    //The difference between write and writeln is that write print the doc and cursor is								
+   		console.log("Hello FTFL");  //wait in the same line after the text but writeln 
+   		console.log("Hello FTFL"); //get the newline where cursor is start from the
+   		console.log("Hello");           //starting point of the line
+   		// confirm("Are you sure you want to delete this?"); //Confirm is used for decision making
+   		// prompt("Whats your name?","e.g. Mainul");         //Prompt is used for collecting information but now-a-days it is obsolete
+           
+       	
+       	//defining Variable
+       	var aNumber = 121; //possible to declare javascript variable with var or without var char
+       	anotherVariable = 222;//both are correct
+       	var carName = 'volvo';
+       	var aBoolean = true;
+       	var cars = ["Saab","volvo","BMW"];
+       	var anEmptyValue = "";//''In between the quotation all are treated as string
+       	var person; //If value is not assigned to the variable then data type is undefined
+       	var myCars = null;
+       	var aNumber0 = 0;
+       	
+       	
+       	//print the value of variable
+       	console.log(aNumber);
+       	console.log(anotherVariable);
+       	
+       	//data type
+       	console.log(typeof aNumber);//typeof operator is used to find the type of a javascript variable
+       	console.log(typeof anotherVariable);
+       	console.log(typeof carName);
+       	console.log(typeof aBoolean);
+       	console.log(typeof cars);
+       	console.log(typeof anEmptyValue);
+       	console.log(typeof person);
+       	console.log(typeof myCars);
+       	console.log(typeof aNumber0);
+       	
+       	
+       	var ftfl = 'Lucky?';
+       	
+       	try{
+       		console.log(ftfl);
+       		console.log(typeof ftfl);
+       	}catch(error){
+       		console.log(typeof error);
+       		console.log(error.name);
+       		console.log(error.message);
+       	}
+       		
+   		console.log(window);//The window object represents an open window in a browser
+   		console.log(self); //Returns the current window and we access windows object in global scope
+   		console.log(this);//In global scope this will be treated as window object
+   		console.log(window.ftfl);//Using window,self and this we can access windows object in global scope
+   		console.log(this.ftfl);
+   		console.log(self.ftfl);
+       	
+       	var aName = 'Mainul';
+       	var aCar='volvo';
+       	var anotherNumber = 0;
+       	var anotherNumberWithout0 = 10;
+       	
+       	console.log("Mainul" in window);//In operator checks whether a variable is exists in window or not
+       	console.log('aName' in window);
+       	console.log('aCar' in window);
+       	
+       	console.log(Number('adaf'));
+       	console.log(Number('adfl123'));
+       	console.log(Number('123asflkj'));//Number returns a number,converted from its argument including floating point
+       	console.log(Number('121'));
+       	console.log(Number('121.12'));
+       	
+       	console.log(parseInt('adaf'));
+       	console.log(parseInt('adfl123'));
+       	console.log(parseInt('123asflkj111'));//parseInt parses its argument and returns an integer
+       	console.log(parseInt('121'));//If a number contains both string and number then parseInt parses the number and return the number if it is first 
+       	console.log(parseInt('121.12'));//before the string
+       	
+       	
+       	console.log(aName*aCar);
+       	console.log(anotherNumber*aCar);//If we add a number with string it returns the value otherwise in multiplication or division or subtraction it is return NAN
+       	console.log(aName+aCar);
+       	console.log(anotherNumber+aCar);
+       	console.log(anotherNumber+anotherNumberWithout0);
+		
+	</script>
+
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Test the let const behaviour</title>
+</head>
+<body>
+
+	<p>let is the blocked   scoped variable, and const is the constant variable which we can't reassigned again on the script after the initialization of the variable</p>
+
+	<script type="text/javascript">
+		
+		let start = 1;
+
+		for(let start = 2; start < 5; start++){
+			console.log(start);
+		}
+
+		console.log(start);
+
+	</script>
+
+</body>
+</html>

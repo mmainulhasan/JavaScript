@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Module Pattern</title>
+</head>
+<body>
+	<h1>Javascirpt Patterns:</h1>
+
+	<script type="text/javascript">
+		// Blue print of module pattern
+		// (function() {
+		// 	// Declare private vars and functions
+
+		// 	return {
+		// 		// Declare public var and functions
+		// 	}
+		// })();
+
+		// STANDARD MODULE PATTERN
+		const UICtrl = (function(){
+			// Private variables and functions
+			let text = 'Module Pattern';
+
+			const changeText = function () {
+				const element = document.querySelector('h1');
+				element.textContent = text;
+			}
+
+			// Public variables and functions
+			return {
+				callChangeText: function() {
+					changeText();
+					console.log(text);
+				}
+			}
+		})();
+
+		UICtrl.callChangeText();
+
+		// REVEALING MODULE PATTERN
+		const ItemCtrl = (function(){
+			let _data = [];
+
+			function add(item) {
+				_data.push(item);
+				console.log('Item Added...');
+			}
+
+			function get(id) {
+				return _data.find(item => {
+					return item.id === id;
+				});
+			}
+
+
+			return {
+				add: add,
+				get: get,
+				data_arr: _data
+			}
+		})();
+
+		ItemCtrl.add({id: 1, name: 'Nabhan'});
+		ItemCtrl.add({id: 2, name: 'Mahnur'});
+		console.log(ItemCtrl.get(1));
+		console.log(ItemCtrl.data_arr);
+
+	</script>
+
+</body>
+</html>

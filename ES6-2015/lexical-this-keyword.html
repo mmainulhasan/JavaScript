@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Lexical this keyword</title>
+</head>
+<body>
+
+	<style type="text/css">
+		.box {
+			width: 400px;
+			padding: 20px;
+			margin: 0 auto;
+			margin-top: 10px;
+			margin-bottom: 10px;
+			text-align: center;
+			font-size: 20px;
+		}
+		.green {
+			background: green;
+		}
+		.light-blue {
+			background: lightblue;
+		}
+		.red-box {
+			background: red;
+		}
+	</style>
+
+	<div class="box green" id="green">
+		I'm green!
+	</div>
+	<div class="box light-blue">
+		I'm blue!
+	</div>
+	<div class="box red-box">
+		I'm orange!
+	</div>
+
+	<script type="text/javascript">
+		// ES5
+		var box5 = {
+			color: 'green',
+			position: 1,
+			clickMe: function() {
+				var self = this;
+				document.querySelector('.green').addEventListener('click', function() {
+					console.log('Hi there');
+					var str = 'This is box number ' + self.position + ' and it is ' + self.color;
+					alert(str);
+				});
+			}
+		}
+		// box5.clickMe();
+
+		// ES6
+		const box6 = {
+			color: 'green',
+			position: 1,
+			clickMe: function() {
+				document.querySelector('.green').addEventListener('click', () => {
+					var str = 'This is box number ' + this.position + ' and it is ' + this.color;
+					alert(str);
+				});
+			}
+		}
+		box6.clickMe();
+
+		function Person(name) {
+			this.name = name;
+		}
+
+		// ES5
+		Person.prototype.myFriends5 = 
+		function (friends) {
+			var arr = friends.map(function(el){
+				return this.name + ' is friends with ' + el;
+			}.bind(this));
+
+			console.log(arr);
+		}
+
+		var friends = ['Bob', 'Jane', 'Mark'];
+		new Person('john').myFriends5(friends);
+
+		// Call, bind and apply allow us to define the this variable manually and bind creates a copy of this function while call actually calls it immediately
+
+		// ES6
+		Person.prototype.myFriends6 = 
+		function (friends) {
+			var arr = friends.map(el => `${this.name} is friends with ${el}`);
+
+			console.log(arr);
+		}
+
+		new Person('Mehedi').myFriends6(friends);
+
+
+	</script>
+
+</body>
+</html>

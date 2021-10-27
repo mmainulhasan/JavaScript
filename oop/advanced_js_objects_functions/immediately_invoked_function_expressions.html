@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Immediately Invoked Function Expressions</title>
+</head>
+<body>
+	<p>This type of function is useful for code modularity and enacapsulation or data hiding</p>
+
+	<script type="text/javascript">
+		(function() {
+			var score = Math.random() * 10;
+			console.log(score >= 5);
+		})();
+
+		(function (goodLuck) {
+			var score = Math.random() * 10;
+			console.log(score >= 5 - goodLuck);
+		})(5);
+
+	</script>
+
+</body>
+</html>

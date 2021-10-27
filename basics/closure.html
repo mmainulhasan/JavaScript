@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Closure</title>
+</head>
+<body id="myBody">
+	<script type="text/javascript">
+		// Closures are functions that refer to independent (free) variables. 
+		// In other words, the function defined in the closure 'remembers' the environment in which it was created.
+		// Lexical scoping
+		// In JavaScript, the scope of a variable is defined by its location within the source code (it is apparent lexically) 
+		// and nested functions have access to variables declared in their outer scope.
+		function init() {
+		  var name = "Mozilla"; // name is a local variable created by init
+		  function displayName() { // displayName() is the inner function, a closure
+		    alert(name); // use variable declared in the parent function    
+		  }
+		  displayName();    
+		};
+	    init();
+
+	    // Closure
+	   // A closure is a special kind of object that combines two things: a function, and the environment in which that function was created.
+	  // The environment consists of any local variables that were in-scope at the time that the closure was created.
+	 // In this case, myFunc is a closure that incorporates both the displayName function and the "Mozilla" string that existed when the closure was created.
+	    function makeFunc() {
+	      var name = "Mozilla";
+	      function displayName() {
+	        alert(name);
+	      }
+	      return displayName;
+	    };
+
+	    var myFunc = makeFunc();
+	    myFunc();
+
+	  // Here's a slightly more interesting example — a makeAdder function:
+	  // add5 and add10 are both closures. 
+	  // They share the same function body definition, but store different environments. In add5's environment, x is 5. As far as add10 is concerned, x is 10.
+	  function makeAdder(x) {
+	    return function(y) {
+	      return x + y;
+	    };
+	  };
+
+	  var add5 = makeAdder(5);
+	  var add10 = makeAdder(10);
+
+	  console.log(add5(2));  // 7
+	  console.log(add10(2)); // 12
+
+	  // Here's a practical example: suppose we wish to add some buttons to a page that adjust the text size. 
+	  // One way of doing this is to specify the font-size of the body element in pixels, 
+	  // then set the size of the other elements on the page (such as headers) using the relative em unit
+	  var body = document.getElementById("myBody");
+	  body.style.fontFamily = "Helvetica, Arial, sans-serif";
+	  body.style.fontSize = "12px";
+	  
+	  // body {
+	  //   font-family: Helvetica, Arial, sans-serif;
+	  //   font-size: 12px;
+	  // }
+
+	  // h1 {
+	  //   font-size: 1.5em;
+	  // }
+
+	  // h2 {
+	  //   font-size: 1.2em;
+	  // }
+
+	  // Our interactive text size buttons can change the font-size property of the body element, 
+	  // and the adjustments will be picked up by other elements on the page thanks to the relative units.
+	  // Here's the JavaScript:
+	  function makeSizer(size) {
+	    return function() {
+	      document.body.style.fontSize = size + 'px';
+	    };
+	  };
+
+	  var size12 = makeSizer(12);
+	  var size14 = makeSizer(14);
+	  var size16 = makeSizer(16);
+
+	  // size12, size14, and size16 are now functions which will resize the body text to 12, 14, and 16 pixels, respectively. 
+	  // We can attach them to buttons (in this case links) as follows
+	  // document.getElementById('size-12').onclick = size12;
+	  // document.getElementById('size-14').onclick = size14;
+	  // document.getElementById('size-16').onclick = size16;
+
+	  var linkArea = document.createElement("div");
+	  linkArea.setAttribute("id", "link-area");
+	  body.appendChild(linkArea);
+
+	  var link1 = document.createElement("a");
+	  link1.setAttribute("href","#");
+	  link1.setAttribute("id", "size-12");
+	  link1.innerHTML = 12;
+	  linkArea.appendChild(link1);
+
+	  var link2 = document.createElement("a");
+	  link2.setAttribute("href","#");
+	  link2.setAttribute("id", "size-14");
+	  link2.innerHTML = 14;
+	  linkArea.appendChild(link2);
+
+	  var link3 = document.createElement("a");
+	  link3.setAttribute("href","#");
+	  link3.setAttribute("id", "size-16");
+	  linkArea.appendChild(link3);
+	  var link3Text = document.createTextNode("16");
+	  link3.appendChild(link3Text);
+
+
+	  // <a href="#" id="size-12">12</a>
+	  // <a href="#" id="size-14">14</a>
+	  // <a href="#" id="size-16">16</a>
+
+	  // public functions that can access private functions and variables, 
+	  // using closures which is also known as the module pattern
+	  var counter = (function() {
+	    var privateCounter = 0;
+	    function changeBy(val) {
+	      privateCounter += val;
+	    }
+	    return {
+	      increment: function() {
+	        changeBy(1);
+	      },
+	      decrement: function() {
+	        changeBy(-1);
+	      },
+	      value: function() {
+	        return privateCounter;
+	      }
+	    };   
+	  })();
+
+	  console.log(counter.value()); // logs 0
+	  counter.increment();
+	  counter.increment();
+	  console.log(counter.value()); // logs 2
+	  counter.decrement();
+	  console.log(counter.value()); // logs 1
+
+	  // Notice how each of the two counters maintains its independence from the other. 
+	  // Its environment during the call of the makeCounter() function is different each time. 
+	  // The closure variable privateCounter contains a different instance each time.
+	  var makeCounter = function() {
+	    var privateCounter = 0;
+	    function changeBy(val) {
+	      privateCounter += val;
+	    }
+	    return {
+	      increment: function() {
+	        changeBy(1);
+	      },
+	      decrement: function() {
+	        changeBy(-1);
+	      },
+	      value: function() {
+	        return privateCounter;
+	      }
+	    }  
+	  };
+
+	  var counter1 = makeCounter();
+	  var counter2 = makeCounter();
+	  alert(counter1.value()); /* Alerts 0 */
+	  counter1.increment();
+	  counter1.increment();
+	  alert(counter1.value()); /* Alerts 2 */
+	  counter1.decrement();
+	  alert(counter1.value()); /* Alerts 1 */
+	  alert(counter2.value()); /* Alerts 0 */
+	</script>
+</body>
+</html>

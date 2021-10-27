@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Closures</title>
+</head>
+<body>
+
+	<p>An inner function has always access to the variable and parameters of its outer function, even after the outer function has returned.</p>
+
+	<script type="text/javascript">
+		// Closures
+
+		function retirement(retirementAge) {
+			var a = ' years left until retirement.';
+			return function(yearOfBirth) {
+				var age = 2021 - yearOfBirth;
+				console.log((retirementAge - age) + a);
+			}
+		}
+
+		var retirementBD = retirement(62);
+		retirementBD(1990);
+
+		retirement(66)(1990);
+
+
+		// Rewrite the functions returning functions using closures
+		function interviewQuestion(job) {
+
+			return function(name){
+				if (job === 'designer') {
+					console.log(name + ', can you please explain what UX design is?');
+				} else if (job === 'teacher') {
+					console.log('What subject do you teach, ' + name + '?');
+				} else {
+					console.log('Hello ' + name + ', what do you do?');
+				}
+			}
+
+			
+		}
+
+		var teacherQuestion = interviewQuestion('teacher');
+		var designerQuestion = interviewQuestion('designer');
+
+		teacherQuestion('Hasan');
+		designerQuestion('Mehedi');
+		designerQuestion('Nabhan');
+
+		interviewQuestion('teacher')('Salim');
+	</script>
+
+</body>
+</html>

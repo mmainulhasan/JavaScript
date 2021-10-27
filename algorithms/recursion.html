@@ -1,0 +1,31 @@
+<script type="text/javascript">
+
+	// Understand recursive process
+
+	// var result = function multiply(product){
+	// 	 			// return result = multiply(2);
+	// 				// return product ;
+	// 				var output = multiply(2);
+	// 				 // multiply(2);
+	// 				// return output;
+	// 			 }
+
+	function multiply(product){
+		// return multiply(product-1);
+		return product-1;
+	}
+
+	// document.write("Our multiplication result is:"+result);
+	// document.write("Our multiplication result is:"+multiply(3));
+
+	function A(n){
+		if(n>0){
+			A(n-1);
+			document.writeln(n+"<br>");
+		}
+	}
+
+	var x = 3;
+	A(x);
+
+</script>

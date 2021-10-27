@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Module Pattern</title>
+</head>
+<body>
+
+
+	<script type="text/javascript">
+		var budgetController = (function() {
+			var x = 23;
+
+			var add = function(a) {
+				return x + a;
+			}
+
+			return {
+				publicTest: function(b) {
+					return add(b);
+				}
+			}
+		})();
+
+		var UIController = (function() {
+			// body...
+		})();
+
+		var controller = (function(budgetCtrl, UICtrl) {
+			var z = budgetCtrl.publicTest(5);
+
+			return {
+				anotherPublic: function() {
+					console.log(z);
+				}
+			}
+		})(budgetController, UIController);
+	</script>
+</body>
+</html>
