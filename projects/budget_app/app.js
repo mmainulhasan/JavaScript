@@ -12,6 +12,8 @@ var budgetController = (function() {
 		this.description = description;
 		this.value = value;
 	};
+	// simple, reusable functions with only one purpose
+	// sum all elementes of an array using the forEach method
 	var calculateTotal = function (type){
 		 var sum = 0;
 		 data.allItems[type].forEach(function (cur) {
